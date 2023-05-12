@@ -1,6 +1,8 @@
-﻿namespace ConsoleProject.Core.Entities;
+﻿using ConsoleProject.Core.Interfaces;
 
-public class Company
+namespace ConsoleProject.Core.Entities;
+
+public class Company : IEntitiy
 {
     public int Id { get; }
     private static int _id;
