@@ -16,7 +16,7 @@ public class Employee : IEntitiy
         Id = _id;
         _id++;
     }
-    public Employee(string name, string surname, double salary)
+    public Employee(string name, string surname, double salary) : this()
     {
         Name = name;
         Salary = salary;

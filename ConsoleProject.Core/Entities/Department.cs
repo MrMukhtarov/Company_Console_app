@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleProject.Core.Interfaces;
 
-namespace ConsoleProject.Core.Entities
+namespace ConsoleProject.Core.Entities;
+
+public class Department : IEntitiy
 {
-    internal class Department
+    public int Id { get; }
+    private static int _id;
+    public string Name { get; set; }
+    public int EmployeeLimit { get; set; }
+    public int CompanyId { get; set; }
+
+    public Department()
     {
+        Id = _id;
+        _id++;
+    }
+    public override string ToString()
+    {
+        return $"{Id} {Name}";
     }
 }
