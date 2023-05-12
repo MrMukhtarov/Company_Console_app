@@ -1,0 +1,12 @@
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\bin\Debug\net6.0\ConsoleProject.Core.deps.json
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\bin\Debug\net6.0\ConsoleProject.Core.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\bin\Debug\net6.0\ConsoleProject.Core.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.AssemblyInfo.cs
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\refint\ConsoleProject.Core.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ConsoleProject.Core.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Core\obj\Debug\net6.0\ref\ConsoleProject.Core.dll
