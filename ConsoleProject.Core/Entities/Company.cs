@@ -13,7 +13,7 @@ public class Company : IEntitiy
         Id = _id;
         _id++;
     }
-    public Company(string name)
+    public Company(string name):this()
     {
         Name = name;
     }

@@ -2,9 +2,7 @@
 using ConsoleProject.Business.Helpers;
 using ConsoleProject.Business.Interfaces;
 using ConsoleProject.Core.Entities;
-using ConsoleProjetc.DataAccess.Context;
 using ConsoleProjetc.DataAccess.Implementations;
-using System.Xml.Linq;
 
 namespace ConsoleProject.Business.Services;
 
@@ -36,7 +34,7 @@ public class CompanyService : ICompanyInterface
     public void Delete(int id)
     {
         var exist = companyRepository.Get(id);
-        if (exist != null)
+        if (exist == null)
         {
             if (departmentRepository.GetAllCompanyId(id) == null)
             {
@@ -52,19 +50,32 @@ public class CompanyService : ICompanyInterface
             throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
         }
     }
-
+    public void Update(Company company, string name)
+    {
+        var exist = companyRepository.Get(company.Id);
+        if (exist == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        if (company.Name.ToUpper() == name.ToUpper())
+        {
+            throw new SameNameException(Helper.Error["SameNameException"]);
+        }
+        companyRepository.Update(company);
+    }
     public List<Company> GetAll()
     {
-        throw new NotImplementedException();
+        return companyRepository.GetAll();
     }
 
     public Company GetById(int id)
     {
-        throw new NotImplementedException();
+        var exist = companyRepository.Get(id);
+        if (exist == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        return exist;
     }
 
-    public void Update(int id)
-    {
-        throw new NotImplementedException();
-    }
 }
