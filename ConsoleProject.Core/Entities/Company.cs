@@ -13,4 +13,8 @@ public class Company : IEntitiy
         Id = _id;
         _id++;
     }
+    public Company(string name)
+    {
+        Name = name;
+    }
 }

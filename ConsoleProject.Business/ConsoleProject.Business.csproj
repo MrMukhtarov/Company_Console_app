@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleProjetc.DataAccess\ConsoleProjetc.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

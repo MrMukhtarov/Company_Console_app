@@ -11,9 +11,10 @@ public class CompanyRepository : IRepostory<Company>
         DbContext.Companys.Add(entity);
     }
 
-    public void Delete(Company entity)
+    public void Delete(int id)
     {
-        DbContext.Companys.Remove(entity);
+        Company? company = DbContext.Companys.Find(c => c.Id == id);
+        DbContext.Companys.Remove(company);
     }
     public void Update(Company entity)
     {
@@ -28,6 +29,10 @@ public class CompanyRepository : IRepostory<Company>
     public List<Company> GetAll()
     {
         return DbContext.Companys;
+    }
+    public Company? GetByName(string name)
+    {
+        return DbContext.Companys.Find(d => d.Name == name);
     }
 
 }

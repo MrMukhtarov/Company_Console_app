@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleProject.Core.Entities;
 
-namespace ConsoleProject.Business.Interfaces
+namespace ConsoleProject.Business.Interfaces;
+
+public interface ICompanyInterface
 {
-    internal interface ICompanyInterface
-    {
-    }
+    void Create(string name);
+    void Update(int id);
+    void Delete(int id);
+    Company GetById(int id);
+    List<Company> GetAll();
 }

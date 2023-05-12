@@ -11,9 +11,10 @@ public class DepartmentRepository : IRepostory<Department>
         DbContext.Departments.Add(entity);
     }
 
-    public void Delete(Department entity)
+    public void Delete(int id)
     {
-        DbContext.Departments.Remove(entity);
+        Department? department = DbContext.Departments.Find(d => d.Id == id);
+        DbContext.Departments.Remove(department);
     }
     public void Update(Department entity)
     {
@@ -29,6 +30,10 @@ public class DepartmentRepository : IRepostory<Department>
     public List<Department> GetAll()
     {
         return DbContext.Departments;
+    }
+    public List<Department> GetAllCompanyId(int id)
+    {
+        return DbContext.Departments.FindAll(d => d.CompanyId == id);
     }
 
 }

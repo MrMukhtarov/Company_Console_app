@@ -1,0 +1,17 @@
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProject.Business.deps.json
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProject.Business.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProject.Business.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProject.Core.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProjetc.DataAccess.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProjetc.DataAccess.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\bin\Debug\net6.0\ConsoleProject.Core.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.AssemblyInfo.cs
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.csproj.CopyComplete
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\refint\ConsoleProject.Business.dll
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ConsoleProject.Business.pdb
+C:\Users\hp\Desktop\ConsoleProject\ConsoleProject.Business\obj\Debug\net6.0\ref\ConsoleProject.Business.dll

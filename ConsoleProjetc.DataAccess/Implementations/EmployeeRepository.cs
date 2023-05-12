@@ -11,9 +11,10 @@ public class EmployeeRepository : IRepostory<Employee>
         DbContext.Employees.Add(entity);
     }
 
-    public void Delete(Employee entity)
+    public void Delete(int id)
     {
-        DbContext.Employees.Remove(entity);
+        Employee? employee = DbContext.Employees.Find(e => e.Id == id);
+        DbContext.Employees.Remove(employee);
     }
 
     public void Update(Employee entity)
