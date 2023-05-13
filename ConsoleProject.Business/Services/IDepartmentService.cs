@@ -47,7 +47,7 @@ public class IDepartmentService : IDepartmentInterface
         var existDepartment = departmentRepository.Get(id);
         if (existDepartment != null)
         {
-                departmentRepository.Delete(id);
+            departmentRepository.Delete(id);
             //if (employeeRepository.GetAllDeparmentId(id).Count == 0)
             //{
             //}
@@ -67,11 +67,16 @@ public class IDepartmentService : IDepartmentInterface
     }
     public List<Department> GetAll()
     {
-        throw new NotImplementedException();
+        return departmentRepository.GetAll();
     }
     public Department GetById(int id)
     {
-        throw new NotImplementedException();
+        var exist = departmentRepository.Get(id);
+        if (exist == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        return exist;
     }
     public void AddEmployee(Employee employee)
     {

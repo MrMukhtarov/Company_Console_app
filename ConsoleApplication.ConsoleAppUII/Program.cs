@@ -22,3 +22,8 @@ foreach(var i in companyService.GetAllDepartment("dolma"))
 {
     Console.WriteLine(i);
 }
+foreach(var i in departmentService.GetAll())
+{
+    Console.WriteLine(i.Name + " " + i.EmployeeLimit);
+}
+Console.WriteLine(departmentService.GetById(1));
