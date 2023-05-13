@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleProject.Core.Entities;
 
-namespace ConsoleProject.Business.Interfaces
+namespace ConsoleProject.Business.Interfaces;
+
+internal interface IDepartmentInterface
 {
-    internal interface IDepartmentInterface
-    {
-    }
+    void Create(string name, int limit);
+    void UpdateDepartment(string name, string newName, int limit);
+    void Delete(int id);
+    Department GetById(int id);
+    List<Department> GetAll();
+    void AddEmployee(Employee employee);
+    List<Employee> GetDepartmentEmployees(string name);
 }
