@@ -42,7 +42,12 @@ public class EmployeeService : IEmployeeInterface
     }
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        var exist = employeeRepository.Get(id);
+        if (exist == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        employeeRepository.Delete(id);
     }
     public void Update(string name, string surname, double salary, int id, int departmentId)
     {
