@@ -26,4 +26,4 @@ foreach(var i in departmentService.GetAll())
 {
     Console.WriteLine(i.Name + " " + i.EmployeeLimit);
 }
-Console.WriteLine(departmentService.GetById(1));
+Console.WriteLine(departmentService.GetById(0));
