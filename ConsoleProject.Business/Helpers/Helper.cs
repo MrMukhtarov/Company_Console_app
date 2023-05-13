@@ -9,6 +9,8 @@ public static class Helper
         {"ObjectNotFoundException","Object is not found" },
         {"SameNameException","Object with this name is already exits" },
         {"LimitDoesNotMatchException","Limit does not match" },
-        {"ObjectDoesNotEmptyExcepion","Object does not empty." }
+        {"ObjectDoesNotEmptyExcepion","Object does not empty." },
+        {"PatternDoesNotMatchException", "Pattern does not match" },
+        {"CannotBeLessThanZeroException", "Cannot be Less Than Zero" }
     };
 }

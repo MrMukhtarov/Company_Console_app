@@ -80,7 +80,12 @@ public class IDepartmentService : IDepartmentInterface
     }
     public void AddEmployee(Employee employee)
     {
-        throw new NotImplementedException();
+        var existEmployee = employeeRepository.Get(employee.DepartmentId);
+        if (existEmployee != null)
+        {
+            throw new ObjectNotFoundException("Basqasina add olunub");
+        }
+        existEmployee.DepartmentId = employee.DepartmentId;
     }
     public List<Employee> GetDepartmentEmployees(string name)
     {

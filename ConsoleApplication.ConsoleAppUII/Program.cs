@@ -27,3 +27,10 @@ foreach(var i in departmentService.GetAll())
     Console.WriteLine(i.Name + " " + i.EmployeeLimit);
 }
 Console.WriteLine(departmentService.GetById(0));
+
+EmployeeService employeeService = new EmployeeService();
+//employeeService.Create("Nicat","",10);
+Employee employee = new Employee("Nicat", "", 10);
+//departmentService.AddEmployee(employee);
+//IDepartmentService departmentService1 = new IDepartmentService();
+//departmentService1.AddEmployee(employee);
