@@ -28,7 +28,9 @@ public class CompanyService : ICompanyInterface
         {
             throw new SizeException(Helper.Error["SizeException"]);
         }
+        Thread.Sleep(1000);
         Company company = new Company(name);
+        company.date = DateTime.Now;
         companyRepository.Add(company);
     }
     public void Delete(int id)
