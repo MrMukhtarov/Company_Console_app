@@ -33,5 +33,8 @@ public class EmployeeRepository : IRepostory<Employee>
     {
         return DbContext.Employees;
     }
-
+    public List<Employee> GetAllDeparmentId(int id)
+    {
+        return DbContext.Employees.FindAll(e => e.DepartmentId == id);
+    }
 }

@@ -35,5 +35,9 @@ public class DepartmentRepository : IRepostory<Department>
     {
         return DbContext.Departments.FindAll(d => d.CompanyId == id);
     }
+    public Department? GetByName(string name)
+    {
+        return DbContext.Departments.Find(d => d.Name == name);
+    }
 
 }

@@ -15,6 +15,12 @@ public class Department : IEntitiy
         Id = _id;
         _id++;
     }
+    public Department(string name, int limit,int companyId) : this()
+    {
+        Name = name;
+        EmployeeLimit = limit;
+        CompanyId = companyId;
+    }
     public override string ToString()
     {
         return $"{Id} {Name}";

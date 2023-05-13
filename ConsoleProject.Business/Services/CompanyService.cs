@@ -28,7 +28,7 @@ public class CompanyService : ICompanyInterface
         {
             throw new SizeException(Helper.Error["SizeException"]);
         }
-        Thread.Sleep(1000);
+        //Thread.Sleep(1000);
         Company company = new Company(name);
         company.date = DateTime.Now;
         companyRepository.Add(company);
@@ -38,13 +38,13 @@ public class CompanyService : ICompanyInterface
         var exist = companyRepository.Get(id);
         if (exist != null)
         {
-            if (departmentRepository.GetAllCompanyId(id) == null)
+            if (departmentRepository.GetAllCompanyId(id).Count == 0)
             {
                 companyRepository.Delete(id);
             }
             else
             {
-                throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+                throw new ObjectDoesNotEmptyExcepion(Helper.Error["ObjectDoesNotEmptyExcepion"]);
             }
         }
         else
@@ -86,4 +86,8 @@ public class CompanyService : ICompanyInterface
         return exist;
     }
 
+    public List<Department> GetAllDepartment(string companyName)
+    {
+        throw new NotImplementedException();
+    }
 }

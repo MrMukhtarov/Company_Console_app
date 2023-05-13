@@ -4,7 +4,7 @@ namespace ConsoleProject.Business.Interfaces;
 
 internal interface IDepartmentInterface
 {
-    void Create(string name, int limit);
+    void Create(string name, int limit, int compoanyId);
     void UpdateDepartment(string name, string newName, int limit);
     void Delete(int id);
     Department GetById(int id);
