@@ -63,7 +63,23 @@ public class IDepartmentService : IDepartmentInterface
     }
     public void UpdateDepartment(string name, string newName, int limit)
     {
-        throw new NotImplementedException();
+        var existName = departmentRepository.GetByName(name.Trim());
+        if (existName == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        string newNameTrim = newName.Trim();
+        if (name.Trim().ToUpper() == newNameTrim.ToUpper())
+        {
+            throw new SameNameException(Helper.Error["SameNameException"]);
+        }
+        if (GetDepartmentEmployees(name).Count > limit)
+        {
+            throw new LimitDoesNotMatchException(Helper.Error["LimitDoesNotMatchException"]);
+        }
+        existName.Name = newName;
+        existName.EmployeeLimit = limit;
+        departmentRepository.Update(existName);
     }
     public List<Department> GetAll()
     {
@@ -89,7 +105,7 @@ public class IDepartmentService : IDepartmentInterface
         {
             throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
         }
-        if (GetDepartmentEmployees(existDepartmentid.Name).Count >= existDepartmentid.EmployeeLimit)
+        if (GetDepartmentEmployees(existDepartmentid.Name).Count > existDepartmentid.EmployeeLimit)
         {
             throw new CapacityLimitException(Helper.Error["CapacityLimitException"]);
         }

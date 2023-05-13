@@ -45,9 +45,19 @@ department.Create("IT", 3, 1);
 
 Employee employee1 = new Employee("Nicat","Muxtarov",125.59);
 Employee employee2 = new Employee("Leman","Muxtarova",125.59);
+Employee employee3 = new Employee("Leman","Muxtarova",125.59);
+Employee employee4 = new Employee("Leman","Muxtarova",125.59);
 
 EmployeeService employeeService = new EmployeeService();
 employeeService.Create(employee1);
 employeeService.Create(employee2);
+employeeService.Create(employee3);
+employeeService.Create(employee4);
 department.AddEmployee(employee1, 1);
 department.AddEmployee(employee2, 1);
+department.AddEmployee(employee3, 2);
+foreach (var i in department.GetDepartmentEmployees("Frontend"))
+{
+    Console.WriteLine(i);
+}
+//department.UpdateDepartment("Backen", "Backend", 3);
