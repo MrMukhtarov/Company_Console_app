@@ -68,4 +68,11 @@ foreach (var i in department.GetDepartmentEmployees("Frontend"))
 {
     Console.WriteLine(i);
 }
+Console.WriteLine("ALL");
+foreach (var i in employeeService.GetAll())
+{
+    Console.WriteLine(i);
+}
+Console.WriteLine("GetById");
+Console.WriteLine(employeeService.GetById(3));
 //department.UpdateDepartment("Backen", "Backend", 3);

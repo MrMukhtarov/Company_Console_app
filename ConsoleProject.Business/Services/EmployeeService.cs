@@ -90,12 +90,17 @@ public class EmployeeService : IEmployeeInterface
     }
     public List<Employee> GetAll()
     {
-        throw new NotImplementedException();
+        return employeeRepository.GetAll();
     }
 
     public Employee GetById(int id)
     {
-        throw new NotImplementedException();
+        var exist = employeeRepository.Get(id);
+        if (exist == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        return exist;
     }
 
 }
