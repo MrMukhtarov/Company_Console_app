@@ -4,7 +4,8 @@ using ConsoleProject.Core.Entities;
 CompanyService companyService = new CompanyService();
 companyService.Create("BErshka");
 companyService.Create("BErshk");
-companyService.Delete(0);
+companyService.Update("BErshka", "NEwyorker");
+companyService.Update("BErshk", "KFC");
 foreach (Company i in companyService.GetAll())
 {
     Console.WriteLine($"{i.Id} {i.Name}");

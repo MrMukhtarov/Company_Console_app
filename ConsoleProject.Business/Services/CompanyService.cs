@@ -34,7 +34,7 @@ public class CompanyService : ICompanyInterface
     public void Delete(int id)
     {
         var exist = companyRepository.Get(id);
-        if (exist == null)
+        if (exist != null)
         {
             if (departmentRepository.GetAllCompanyId(id) == null)
             {
@@ -50,18 +50,24 @@ public class CompanyService : ICompanyInterface
             throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
         }
     }
-    public void Update(Company company, string name)
+    public void Update(string oldName, string newName)
     {
-        var exist = companyRepository.Get(company.Id);
+        string name = newName.Trim();
+        var exist = companyRepository.GetByName(oldName.Trim());
+        if (name.Length <= 0)
+        {
+            throw new SizeException(Helper.Error["SizeException"]);
+        }
         if (exist == null)
         {
             throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
         }
-        if (company.Name.ToUpper() == name.ToUpper())
+        if (exist.Name.ToUpper() == newName.ToUpper())
         {
             throw new SameNameException(Helper.Error["SameNameException"]);
         }
-        companyRepository.Update(company);
+        exist.Name = name;
+        companyRepository.Update(exist);
     }
     public List<Company> GetAll()
     {
