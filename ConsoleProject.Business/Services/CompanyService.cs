@@ -2,6 +2,7 @@
 using ConsoleProject.Business.Helpers;
 using ConsoleProject.Business.Interfaces;
 using ConsoleProject.Core.Entities;
+using ConsoleProjetc.DataAccess.Context;
 using ConsoleProjetc.DataAccess.Implementations;
 
 namespace ConsoleProject.Business.Services;
@@ -88,6 +89,24 @@ public class CompanyService : ICompanyInterface
 
     public List<Department> GetAllDepartment(string companyName)
     {
-        throw new NotImplementedException();
+        string name = companyName.Trim();
+        var exist = companyRepository.GetByName(name);
+        if (exist != null)
+        {
+            var existDepartment = departmentRepository.GetAllCompanyId(exist.Id);
+            if (existDepartment != null)
+            {
+                return existDepartment;
+            }
+            else
+            {
+
+                throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+            }
+        }
+        else
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
     }
 }
