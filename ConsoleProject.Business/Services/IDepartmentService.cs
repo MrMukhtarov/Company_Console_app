@@ -8,9 +8,9 @@ namespace ConsoleProject.Business.Services;
 
 public class IDepartmentService : IDepartmentInterface
 {
-    DepartmentRepository departmentRepository { get; }
-    CompanyRepository companyRepository { get; }
-    EmployeeRepository employeeRepository { get; }
+    public DepartmentRepository departmentRepository { get; }
+    public CompanyRepository companyRepository { get; }
+    public EmployeeRepository employeeRepository { get; }
 
     public IDepartmentService()
     {
@@ -47,14 +47,14 @@ public class IDepartmentService : IDepartmentInterface
         var existDepartment = departmentRepository.Get(id);
         if (existDepartment != null)
         {
-            departmentRepository.Delete(id);
-            //if (employeeRepository.GetAllDeparmentId(id).Count == 0)
-            //{
-            //}
-            //else
-            //{
-            //    throw new ObjectDoesNotEmptyExcepion(Helper.Error["ObjectDoesNotEmptyExcepion"]);
-            //}
+            if (employeeRepository.GetAllDeparmentId(id).Count == 0)
+            {
+                departmentRepository.Delete(id);
+            }
+            else
+            {
+                throw new ObjectDoesNotEmptyExcepion(Helper.Error["ObjectDoesNotEmptyExcepion"]);
+            }
         }
         else
         {
@@ -78,17 +78,27 @@ public class IDepartmentService : IDepartmentInterface
         }
         return exist;
     }
-    public void AddEmployee(Employee employee)
+    public void AddEmployee(Employee employee, int departmentId)
     {
-        var existEmployee = employeeRepository.Get(employee.DepartmentId);
-        if (existEmployee != null)
+        if (employee.DepartmentId != 0)
         {
-            throw new ObjectNotFoundException("Basqasina add olunub");
+            throw new EmployeeHasDepartmentIdException(Helper.Error["EmployeeHasDepartmentIdException"]);
         }
-        existEmployee.DepartmentId = employee.DepartmentId;
+        var existDepartmentid = departmentRepository.Get(departmentId);
+        if (existDepartmentid == null)
+        {
+            throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
+        }
+        if (GetDepartmentEmployees(existDepartmentid.Name).Count >= existDepartmentid.EmployeeLimit)
+        {
+            throw new CapacityLimitException(Helper.Error["CapacityLimitException"]);
+        }
+        employee.DepartmentId = departmentId;
     }
     public List<Employee> GetDepartmentEmployees(string name)
     {
-        throw new NotImplementedException();
+        var departmentId = departmentRepository.GetByName(name);
+        var employeeId = employeeRepository.GetAllDeparmentId(departmentId.Id);
+        return employeeId;
     }
 }

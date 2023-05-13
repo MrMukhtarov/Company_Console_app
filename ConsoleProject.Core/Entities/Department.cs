@@ -12,10 +12,10 @@ public class Department : IEntitiy
 
     public Department()
     {
-        Id = _id;
         _id++;
+        Id = _id;
     }
-    public Department(string name, int limit,int companyId) : this()
+    public Department(string name, int limit, int companyId) : this()
     {
         Name = name;
         EmployeeLimit = limit;

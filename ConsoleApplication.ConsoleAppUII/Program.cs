@@ -9,8 +9,6 @@ companyService.Create("dolma");
 //companyService.Update("BErshk", "KFC");
 //Console.WriteLine(companyService.GetById(1));
 
-IDepartmentService departmentService = new IDepartmentService();
-departmentService.Create("Backend", 2, 2);
 //departmentService.Delete(0);
 //companyService.Delete(2);
 
@@ -18,19 +16,38 @@ foreach (Company i in companyService.GetAll())
 {
     Console.WriteLine($"{i.Id} {i.Name} {i.date}");
 }
-foreach(var i in companyService.GetAllDepartment("dolma"))
+foreach(var i in companyService.GetAllDepartment("BErshka"))
 {
     Console.WriteLine(i);
 }
-foreach(var i in departmentService.GetAll())
-{
-    Console.WriteLine(i.Name + " " + i.EmployeeLimit);
-}
-Console.WriteLine(departmentService.GetById(0));
+//IDepartmentService departmentService = new IDepartmentService();
+//departmentService.Create("Backend", 2, 2);
+//departmentService.Create("Forntend", 2, 2);
+//foreach(var i in departmentService.GetAll())
+//{
+//    Console.WriteLine(i.Name + " " + i.EmployeeLimit);
+//}
+//Console.WriteLine(departmentService.GetById(0));
+
+//EmployeeService employeeService = new EmployeeService();
+
+//Employee employee = new Employee("nicat"," ",15000);
+
+//Employee employee1 = new Employee("nicat"," ",15000);
+//employeeService.Create(employee);
+//departmentService.AddEmployee(employee1,0);
+//departmentService.AddEmployee(employee1,0);
+
+IDepartmentService department = new IDepartmentService();
+department.Create("Backend", 2, 1);
+department.Create("Frontend", 2, 1);
+department.Create("IT", 3, 1);
+
+Employee employee1 = new Employee("Nicat","Muxtarov",125.59);
+Employee employee2 = new Employee("Leman","Muxtarova",125.59);
 
 EmployeeService employeeService = new EmployeeService();
-//employeeService.Create("Nicat","",10);
-Employee employee = new Employee("Nicat", "", 10);
-//departmentService.AddEmployee(employee);
-//IDepartmentService departmentService1 = new IDepartmentService();
-//departmentService1.AddEmployee(employee);
+employeeService.Create(employee1);
+employeeService.Create(employee2);
+department.AddEmployee(employee1, 1);
+department.AddEmployee(employee2, 1);

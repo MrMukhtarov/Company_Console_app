@@ -8,24 +8,26 @@ namespace ConsoleProject.Business.Services;
 
 public class EmployeeService : IEmployeeInterface
 {
-    EmployeeRepository employeeRepository { get; }
+    public EmployeeRepository employeeRepository { get; }
     public EmployeeService()
     {
         employeeRepository = new EmployeeRepository();
     }
     public void Create(Employee employee)
     {
-        if (employee.Name.Trim().Length < 2)
+        string NameTrim = employee.Name.Trim();
+        string SurnameTrim = employee.Surname.Trim();
+        if (NameTrim.Length < 2)
         {
             throw new SizeException(Helper.Error["SizeException"]);
         }
-        if (!employee.Name.Trim().IsOnlyLetters())
+        if (!NameTrim.IsOnlyLetters())
         {
             throw new PatternDoesNotMatchException(Helper.Error["PatternDoesNotMatchException"]);
         }
-        if (!string.IsNullOrWhiteSpace(employee.Surname.Trim()))
+        if (!string.IsNullOrWhiteSpace(SurnameTrim))
         {
-            if (!employee.Surname.Trim().IsOnlyLetters())
+            if (!SurnameTrim.IsOnlyLetters())
             {
                 throw new PatternDoesNotMatchException(Helper.Error["PatternDoesNotMatchException"]);
             }

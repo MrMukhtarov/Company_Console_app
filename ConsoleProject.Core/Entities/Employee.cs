@@ -13,8 +13,8 @@ public class Employee : IEntitiy
 
     public Employee()
     {
-        Id = _id;
         _id++;
+        Id = _id;
     }
     public Employee(string name, string surname, double salary) : this()
     {

@@ -11,9 +11,8 @@ public class Company : IEntitiy
 
     public Company()
     {
-        Id = _id;
         _id++;
-        //date = DateTime.Now;
+        Id = _id;
     }
     public Company(string name) : this()
     {

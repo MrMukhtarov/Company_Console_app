@@ -9,6 +9,6 @@ internal interface IDepartmentInterface
     void Delete(int id);
     Department GetById(int id);
     List<Department> GetAll();
-    void AddEmployee(Employee employee);
+    void AddEmployee(Employee employee,int departmentId);
     List<Employee> GetDepartmentEmployees(string name);
 }

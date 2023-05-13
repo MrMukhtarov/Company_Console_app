@@ -11,6 +11,8 @@ public static class Helper
         {"LimitDoesNotMatchException","Limit does not match" },
         {"ObjectDoesNotEmptyExcepion","Object does not empty." },
         {"PatternDoesNotMatchException", "Pattern does not match" },
-        {"CannotBeLessThanZeroException", "Cannot be Less Than Zero" }
+        {"CannotBeLessThanZeroException", "Cannot be Less Than Zero" },
+        {"EmployeeHasDepartmentIdException", "Employee already Has DepartmentId" },
+        {"CapacityLimitException","exceeded the limit capacity" }
     };
 }

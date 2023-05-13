@@ -10,7 +10,6 @@ public class DepartmentRepository : IRepostory<Department>
     {
         DbContext.Departments.Add(entity);
     }
-
     public void Delete(int id)
     {
         Department? department = DbContext.Departments.Find(d => d.Id == id);
