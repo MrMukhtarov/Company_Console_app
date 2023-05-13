@@ -56,6 +56,13 @@ employeeService.Create(employee4);
 department.AddEmployee(employee1, 1);
 department.AddEmployee(employee2, 1);
 department.AddEmployee(employee3, 2);
+employeeService.Update("Nijat", "Mukhtarov", 125000, 1, 2);
+Console.WriteLine("BAckend");
+foreach (var i in department.GetDepartmentEmployees("Backend"))
+{
+    Console.WriteLine(i);
+}
+Console.WriteLine("Forntend");
 foreach (var i in department.GetDepartmentEmployees("Frontend"))
 {
     Console.WriteLine(i);
