@@ -1,10 +1,14 @@
 ﻿using ConsoleProject.Business.Services;
 using ConsoleProjetc.DataAccess.Context;
+using ConsoleProjetc.DataAccess.Implementations;
 using System.Xml.Linq;
 
 CompanyService companyService = new CompanyService();
 IDepartmentService departmentService = new IDepartmentService();
 EmployeeService employeeService = new EmployeeService();
+DepartmentRepository departmentRepository = new DepartmentRepository();
+CompanyRepository companyRepository = new CompanyRepository();
+
 do
 {
     Console.WriteLine("====Welcome Company Management System====\n");
@@ -48,15 +52,19 @@ do
             break;
         case 3:
             Console.Clear();
+            Delete(companyService);
             break;
         case 4:
             Console.Clear();
+            GetAll(companyService);
             break;
         case 5:
             Console.Clear();
+            GetById(companyService);
             break;
         case 6:
             Console.Clear();
+            GetAllDepartment(companyService);
             break;
         case 7:
             break;
@@ -133,22 +141,34 @@ void Update(CompanyService companyService)
     bool check = false;
     do
     {
+        foreach (var company in DbContext.Companys)
+        {
+            Console.WriteLine($"Sirketin adi {company.Name}\n");
+        }
         Console.WriteLine("Deyismek istediyiniz Company`nin adini daxil edin");
         oldName = Console.ReadLine();
         Console.WriteLine("Yeni Adi daxil edin");
         newName = Console.ReadLine();
         var exist = DbContext.Companys.Find(c => c.Name == oldName.Trim());
+        var existNewName = DbContext.Companys.Find(c => c.Name == newName.Trim());
         if (oldName.Trim().Length > 0)
         {
             if (exist != null)
             {
-                if (oldName.Trim().ToLower() != newName.Trim().ToLower())
+                if (existNewName == null)
                 {
-                    check = true;
+                    if (oldName.Trim().ToLower() != newName.Trim().ToLower())
+                    {
+                        check = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Adlar eynidir");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Adlar eynidir");
+                    Console.WriteLine("Bu ad hal hazirda var");
                 }
             }
             else
@@ -162,4 +182,101 @@ void Update(CompanyService companyService)
         }
     } while (!check);
     companyService.Update(oldName, newName);
+}
+void Delete(CompanyService companyService)
+{
+    int id;
+    bool check = false;
+    do
+    {
+        foreach (var company in DbContext.Companys)
+        {
+            Console.WriteLine($"Sirketin ID`si: {company.Id} Sirketin adi: {company.Name}\n");
+        }
+        Console.WriteLine("Silmek istediyiniz sirketin ID`Sni elave edin");
+        id = int.Parse(Console.ReadLine());
+        var exist = DbContext.Companys.Find(c => c.Id == id);
+        if (exist != null)
+        {
+            if (departmentRepository.GetAllCompanyId(id).Count == 0)
+            {
+                check = true;
+            }
+            else
+            {
+                Console.WriteLine("Departmentde isciler var silmek mumkun deyil");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Bu ID`de Company yoxdur");
+        }
+    } while (!check);
+    companyService.Delete(id);
+}
+
+void GetById(CompanyService companyService)
+{
+    int id;
+    bool check = false;
+    do
+    {
+        foreach (var company in DbContext.Companys)
+        {
+            Console.WriteLine($"Sirketin ID`si: {company.Id} Sirketin adi: {company.Name}\n");
+        }
+        Console.WriteLine("Silmek istediyiniz sirketin ID`Sni elave edin");
+        id = int.Parse(Console.ReadLine());
+        var exist = DbContext.Companys.Find(c => c.Id == id);
+        if (exist != null)
+        {
+            Console.WriteLine($"Axtaris Neticesi: {exist.Id} {exist.Name}");
+            check = true;
+        }
+        else
+        {
+            Console.WriteLine($"Bu {id}`li company yoxdur ");
+        }
+    } while (!check);
+    companyService.GetById(id);
+}
+void GetAll(CompanyService companyService)
+{
+    Console.WriteLine("Butun Sirketlerin siyahisi: \n");
+    foreach (var company in companyService.GetAll())
+    {
+        Console.WriteLine($"Sirket ID`si: {company.Id} Sirket Adi: {company.Name}");
+    }
+    companyService.GetAll();
+}
+void GetAllDepartment(CompanyService companyService)
+{
+    string name;
+    bool check = false;
+    do
+    {
+        foreach (var company in companyService.GetAll())
+        {
+            Console.WriteLine($"Sirket ID`si: {company.Id} Sirket Adi: {company.Name}");
+        }
+        Console.WriteLine("Sirketin adini daxil edin:");
+        name = Console.ReadLine();
+
+        var exist = companyRepository.GetByName(name.Trim());
+
+        if (exist != null)
+        {
+            var existCompanyId = departmentRepository.GetAllCompanyId(exist.Id);
+            companyService.GetAllDepartment(name);
+            check = true;
+            if (existCompanyId.Count == 0)
+            {
+                Console.WriteLine("Department yoxdur bu Sirketde");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Axtardiginiz adda sirket yoxdur");
+        }
+    } while (!check);
 }
