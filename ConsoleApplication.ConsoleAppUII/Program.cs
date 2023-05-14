@@ -1,10 +1,8 @@
-﻿using ConsoleProject.Business.Exceptions;
-using ConsoleProject.Business.Helpers;
+﻿using ConsoleProject.Business.Helpers;
 using ConsoleProject.Business.Services;
 using ConsoleProject.Core.Entities;
 using ConsoleProjetc.DataAccess.Context;
 using ConsoleProjetc.DataAccess.Implementations;
-using System.Xml.Linq;
 
 CompanyService companyService = new CompanyService();
 IDepartmentService departmentService = new IDepartmentService();
@@ -104,20 +102,181 @@ do
             break;
         case 15:
             Console.Clear();
+            DeleteEmployee(employeeService);
             break;
         case 16:
             Console.Clear();
+            UpdateEmployee(employeeService);
             break;
         case 17:
             Console.Clear();
+            EmployeeGetAll(employeeService);
             break;
         case 18:
             Console.Clear();
+            EmployeeGetById(employeeService);
             break;
-        case 19:
+        case 0:
             return;
     }
 } while (true);
+
+void DeleteEmployee(EmployeeService employeeService)
+{
+    int id;
+    bool check = false;
+
+    do
+    {
+        Console.WriteLine("Silmek istediyiniz Employenin idsni secin\n");
+        foreach (var d in DbContext.Employees)
+        {
+            Console.WriteLine($"Employenin ID`si: {d.Id} Employenin adi: {d.Name} Employenin Soyadi: {d.Surname}\n");
+        }
+        id = int.Parse(Console.ReadLine());
+
+        var exist = employeeRepository.Get(id);
+
+        if (exist != null)
+        {
+            check = true;
+        }
+        else
+        {
+            Console.WriteLine("Bu id`li Employee yoxdur!");
+        }
+    } while (!check);
+    employeeService.DeleteEmployee(id);
+}
+
+void UpdateEmployee(EmployeeService employeeService)
+{
+    string name, surname;
+    double salary;
+    int id;
+    int departmentId;
+    bool check = false;
+
+    do
+    {
+        Console.WriteLine("Deyismek istediyiniz Employenin ID`sni daxil edin");
+        foreach (var d in DbContext.Employees)
+        {
+            Console.WriteLine($"Employenin ID`si: {d.Id} Employenin adi: {d.Name}\n");
+        }
+        id = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Yeni ad daxil edin");
+        name = Console.ReadLine();
+
+        Console.WriteLine("Soyad daxil edin");
+        surname = Console.ReadLine();
+
+        Console.WriteLine("Maas Daxil edin");
+        salary = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Department Id daxil edin");
+        foreach (var d in DbContext.Departments)
+        {
+            Console.WriteLine($"Departmentin ID`si: {d.Id} Departmentin adi: {d.Name}\n");
+        }
+        departmentId = int.Parse(Console.ReadLine());
+
+        var exist = employeeRepository.Get(id);
+        string nameTrim = name.Trim();
+        string SurnameTrim = surname.Trim();
+        var existDepartmentId = departmentRepository.Get(departmentId);
+
+        if (exist != null)
+        {
+            if (nameTrim.Length > 2)
+            {
+                if (name.IsOnlyLetters())
+                {
+                    if (string.IsNullOrWhiteSpace(SurnameTrim))
+                    {
+                        if (SurnameTrim.IsOnlyLetters())
+                        {
+                            if (salary > 0)
+                            {
+                                if (existDepartmentId != null)
+                                {
+                                    check = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Bele bir department yoxdur");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Maas 0 dan boyuk olmalidir");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Soyad ancag herflerden ibraret olmalidir");
+                        }
+                    }
+                    else
+                    {
+                        check = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ad sadece herflerden ibaret olmalidir");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Adin uzunlugu 2 den cox olmalidir");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Bu ID li employe yoxdur");
+        }
+
+    } while (!check);
+    employeeService.UpdateEmployee(name, surname, salary, id, departmentId);
+}
+
+void EmployeeGetById(EmployeeService employeeService)
+{
+    int id;
+    bool check = false;
+    do
+    {
+        Console.WriteLine("Secmek istediyiniz Employenin ID`Sni elave edin");
+        foreach (var d in DbContext.Employees)
+        {
+            Console.WriteLine($"Employenin ID`si: {d.Id} Employenin adi: {d.Name}\n");
+        }
+        id = int.Parse(Console.ReadLine());
+        var exist = DbContext.Employees.Find(c => c.Id == id);
+        if (exist != null)
+        {
+            Console.WriteLine($"Axtaris Neticesi: {exist.Id} {exist.Name}");
+            check = true;
+        }
+        else
+        {
+            Console.WriteLine($"Bu {id}`li Employee yoxdur ");
+        }
+    } while (!check);
+    employeeService.EmployeeGetById(id);
+}
+
+void EmployeeGetAll(EmployeeService employeeService)
+{
+    Console.WriteLine("Butun Employellerin siyahisi: \n");
+    foreach (var d in employeeService.EmployeeGetAll())
+    {
+        Console.WriteLine($"Employenin ID`si: {d.Id} Employenin Adi: {d.Name}");
+    }
+    employeeService.EmployeeGetAll();
+}
 
 void GetDepartmentEmployees(IDepartmentService departmentService)
 {
@@ -164,8 +323,7 @@ void GetDepartmentEmployees(IDepartmentService departmentService)
 void AddEmployee(IDepartmentService departmentService)
 {
     bool check = false;
-    string name;
-    string surname;
+    string name, surname;
     double salary;
     int departmentId;
     do
@@ -259,8 +417,7 @@ void AddEmployee(IDepartmentService departmentService)
 void CreateEmployee(EmployeeService employeeService)
 {
     bool check = false;
-    string name;
-    string surname;
+    string name, surname;
     double salary;
     do
     {
