@@ -1,4 +1,5 @@
 ﻿using ConsoleProject.Business.Services;
+using ConsoleProject.Core.Entities;
 
 CompanyService company = new CompanyService();
 company.Create("NctLmn");
@@ -14,6 +15,16 @@ foreach (var i in company.GetAll())
 }
 
 
+Console.WriteLine("==========");
+Console.WriteLine("Employee");
+Console.WriteLine("==========");
+Employee employee1 = new Employee("Nicat","Muxtarov",12500);
+Employee employee2 = new Employee("Leman", "Mammadly", 12500);
+Employee employee3 = new Employee("Lomon", "Muxtarova", 12500);
+EmployeeService employeeService = new EmployeeService();
+employeeService.Create(employee1);
+employeeService.Create(employee2);
+employeeService.Create(employee3);
 
 Console.WriteLine("==========");
 Console.WriteLine("Department");
@@ -21,7 +32,10 @@ Console.WriteLine("==========");
 IDepartmentService department = new IDepartmentService();
 department.Create("Backend", 2, 2);
 department.Create("Frontend", 2, 2);
-department.UpdateDepartment("Frontend", "React", 1);
+department.UpdateDepartment("Frontend", "React", 3);
+department.AddEmployee(employee1, 2);
+department.AddEmployee(employee2, 2);
+department.AddEmployee(employee3, 2);
 foreach (var i in department.GetAll())
 {
     Console.WriteLine(i);
@@ -29,6 +43,11 @@ foreach (var i in department.GetAll())
 
 Console.WriteLine("Myau departments");
 foreach (var i in company.GetAllDepartment("myau"))
+{
+    Console.WriteLine(i);
+}
+Console.WriteLine("GET Department Employee");
+foreach (var i in department.GetDepartmentEmployees("Reacts"))
 {
     Console.WriteLine(i);
 }
