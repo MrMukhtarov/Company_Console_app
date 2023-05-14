@@ -20,9 +20,17 @@ public class CompanyService : ICompanyInterface
     {
         string TrimName = name.Trim();
         var exist = companyRepository.GetByName(TrimName);
+        var existName = companyRepository.GetAll();
         if (exist != null)
         {
             throw new AlreadyExistException(Helper.Error["AlreadyExistException"]);
+        }
+        foreach (var i in existName)
+        {
+            if (i.Name.ToLower() == TrimName.ToLower())
+            {
+                throw new AlreadyExistException(Helper.Error["AlreadyExistException"]);
+            }
         }
         if (TrimName.Length <= 0)
         {
