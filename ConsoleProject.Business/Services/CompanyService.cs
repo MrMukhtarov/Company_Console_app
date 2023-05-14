@@ -16,7 +16,7 @@ public class CompanyService : ICompanyInterface
         companyRepository = new CompanyRepository();
         departmentRepository = new DepartmentRepository();
     }
-    public void Create(string name)
+    public void CreateCompany(string name)
     {
         string TrimName = name.Trim();
         var exist = companyRepository.GetByName(TrimName);
@@ -40,7 +40,7 @@ public class CompanyService : ICompanyInterface
         company.date = DateTime.Now;
         companyRepository.Add(company);
     }
-    public void Delete(int id)
+    public void DeleteCompany(int id)
     {
         var exist = companyRepository.Get(id);
         if (exist != null)
@@ -59,7 +59,7 @@ public class CompanyService : ICompanyInterface
             throw new ObjectNotFoundException(Helper.Error["ObjectNotFoundException"]);
         }
     }
-    public void Update(string oldName, string newName)
+    public void UpdateCompany(string oldName, string newName)
     {
         string name = newName.Trim();
         var exist = companyRepository.GetByName(oldName.Trim());
@@ -83,12 +83,12 @@ public class CompanyService : ICompanyInterface
         exist.Name = name;
         companyRepository.Update(exist);
     }
-    public List<Company> GetAll()
+    public List<Company> CompanyGetAll()
     {
         return companyRepository.GetAll();
     }
 
-    public Company GetById(int id)
+    public Company CompanyGetById(int id)
     {
         var exist = companyRepository.Get(id);
         if (exist == null)

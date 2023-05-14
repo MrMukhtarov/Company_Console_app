@@ -44,29 +44,31 @@ do
     {
         case 1:
             Console.Clear();
-            Create(companyService);
+            CreateCompany(companyService);
             break;
         case 2:
             Console.Clear();
-            Update(companyService);
+            UpdateCompany(companyService);
             break;
         case 3:
             Console.Clear();
-            Delete(companyService);
+            DeleteCompany(companyService);
             break;
         case 4:
             Console.Clear();
-            GetAll(companyService);
+            CompanyGetAll(companyService);
             break;
         case 5:
             Console.Clear();
-            GetById(companyService);
+            CompanyGetById(companyService);
             break;
         case 6:
             Console.Clear();
             GetAllDepartment(companyService);
             break;
         case 7:
+            Console.Clear();
+            CreateDepartment(departmentService);
             break;
         case 8:
             break;
@@ -104,7 +106,53 @@ do
     }
 } while (true);
 
-void Create(CompanyService companyService)
+void CreateDepartment(IDepartmentService departmentService)
+{
+    string name;
+    int limit;
+    int companyId;
+    bool check = false;
+    do
+    {
+        Console.WriteLine("Department Adi daxil edin");
+        name = Console.ReadLine();
+        Console.WriteLine("Limit daxil edin");
+        limit = int.Parse(Console.ReadLine());
+        foreach (var i in DbContext.Companys)
+        {
+            Console.WriteLine($"Sirketin ID`si: {i.Id} Sirketin adi: {i.Name}\n");
+        }
+        Console.WriteLine("Departmentin aid olacagi Companynin ID`sni yazin");
+        companyId = int.Parse(Console.ReadLine());
+        var exist = departmentRepository.GetByName(name.Trim());
+        var company = companyRepository.Get(companyId);
+        
+        if(exist == null)
+        {
+            if(limit > 0)
+            {
+                if(company != null)
+                {
+                    check = true;
+                }
+                else
+                {
+                    Console.WriteLine("Bu ID`de Company yoxdur");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Limit 0 dan boyuk olmalidir");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Bu adda department var");
+        }
+    }while (!check);
+    departmentService.CreateDepartment(name, limit, companyId);
+}
+void CreateCompany(CompanyService companyService)
 {
     string? name;
     bool check = false;
@@ -113,7 +161,7 @@ void Create(CompanyService companyService)
         Console.Write("Ad daxil edin: ");
         name = Console.ReadLine();
         var exist = DbContext.Companys.Find(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-        var names = companyService.GetAll();
+        var names = companyService.CompanyGetAll();
 
         if (!string.IsNullOrEmpty(name))
         {
@@ -131,10 +179,10 @@ void Create(CompanyService companyService)
             Console.WriteLine("Ad uygun deyil. Zehmet olmasa bir daha daxil edin \n");
         }
     } while (!check);
-    companyService.Create(name);
+    companyService.CreateCompany(name);
 }
 
-void Update(CompanyService companyService)
+void UpdateCompany(CompanyService companyService)
 {
     string? newName;
     string? oldName;
@@ -181,9 +229,9 @@ void Update(CompanyService companyService)
             Console.WriteLine("Sozun uzunlugu azdir");
         }
     } while (!check);
-    companyService.Update(oldName, newName);
+    companyService.UpdateCompany(oldName, newName);
 }
-void Delete(CompanyService companyService)
+void DeleteCompany(CompanyService companyService)
 {
     int id;
     bool check = false;
@@ -212,20 +260,20 @@ void Delete(CompanyService companyService)
             Console.WriteLine("Bu ID`de Company yoxdur");
         }
     } while (!check);
-    companyService.Delete(id);
+    companyService.DeleteCompany(id);
 }
 
-void GetById(CompanyService companyService)
+void CompanyGetById(CompanyService companyService)
 {
     int id;
     bool check = false;
     do
     {
+        Console.WriteLine("Silmek istediyiniz sirketin ID`Sni elave edin");
         foreach (var company in DbContext.Companys)
         {
             Console.WriteLine($"Sirketin ID`si: {company.Id} Sirketin adi: {company.Name}\n");
         }
-        Console.WriteLine("Silmek istediyiniz sirketin ID`Sni elave edin");
         id = int.Parse(Console.ReadLine());
         var exist = DbContext.Companys.Find(c => c.Id == id);
         if (exist != null)
@@ -238,16 +286,16 @@ void GetById(CompanyService companyService)
             Console.WriteLine($"Bu {id}`li company yoxdur ");
         }
     } while (!check);
-    companyService.GetById(id);
+    companyService.CompanyGetById(id);
 }
-void GetAll(CompanyService companyService)
+void CompanyGetAll(CompanyService companyService)
 {
     Console.WriteLine("Butun Sirketlerin siyahisi: \n");
-    foreach (var company in companyService.GetAll())
+    foreach (var company in companyService.CompanyGetAll())
     {
         Console.WriteLine($"Sirket ID`si: {company.Id} Sirket Adi: {company.Name}");
     }
-    companyService.GetAll();
+    companyService.CompanyGetAll();
 }
 void GetAllDepartment(CompanyService companyService)
 {
@@ -255,7 +303,7 @@ void GetAllDepartment(CompanyService companyService)
     bool check = false;
     do
     {
-        foreach (var company in companyService.GetAll())
+        foreach (var company in companyService.CompanyGetAll())
         {
             Console.WriteLine($"Sirket ID`si: {company.Id} Sirket Adi: {company.Name}");
         }
@@ -267,7 +315,10 @@ void GetAllDepartment(CompanyService companyService)
         if (exist != null)
         {
             var existCompanyId = departmentRepository.GetAllCompanyId(exist.Id);
-            companyService.GetAllDepartment(name);
+            foreach(var i in companyService.GetAllDepartment(name))
+            {
+                Console.WriteLine(i);
+            }
             check = true;
             if (existCompanyId.Count == 0)
             {
@@ -280,3 +331,6 @@ void GetAllDepartment(CompanyService companyService)
         }
     } while (!check);
 }
+
+
+

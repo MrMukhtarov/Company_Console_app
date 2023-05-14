@@ -4,11 +4,11 @@ namespace ConsoleProject.Business.Interfaces;
 
 internal interface IDepartmentInterface
 {
-    void Create(string name, int limit, int compoanyId);
+    void CreateDepartment(string name, int limit, int compoanyId);
     void UpdateDepartment(string name, string newName, int limit);
-    void Delete(int id);
-    Department GetById(int id);
-    List<Department> GetAll();
+    void DeleteDepartment(int id);
+    Department DepartmentGetById(int id);
+    List<Department> DepartmentGetAll();
     void AddEmployee(Employee employee,int departmentId);
     List<Employee> GetDepartmentEmployees(string name);
 }

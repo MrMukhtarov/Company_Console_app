@@ -4,10 +4,10 @@ namespace ConsoleProject.Business.Interfaces;
 
 public interface ICompanyInterface
 {
-    void Create(string name);
-    void Update(string oldName, string newName);
-    void Delete(int id);
-    Company GetById(int id);
-    List<Company> GetAll();
+    void CreateCompany(string name);
+    void UpdateCompany(string oldName, string newName);
+    void DeleteCompany(int id);
+    Company CompanyGetById(int id);
+    List<Company> CompanyGetAll();
     List<Department> GetAllDepartment(string companyName);
 }

@@ -18,7 +18,7 @@ public class IDepartmentService : IDepartmentInterface
         companyRepository = new CompanyRepository();
         employeeRepository = new EmployeeRepository();
     }
-    public void Create(string name, int limit, int compoanyId)
+    public void CreateDepartment(string name, int limit, int compoanyId)
     {
         string names = name.Trim();
         var exist = departmentRepository.GetByName(names);
@@ -42,7 +42,7 @@ public class IDepartmentService : IDepartmentInterface
         Department department = new Department(names, limit, compoanyId);
         departmentRepository.Add(department);
     }
-    public void Delete(int id)
+    public void DeleteDepartment(int id)
     {
         var existDepartment = departmentRepository.Get(id);
         if (existDepartment != null)
@@ -85,11 +85,11 @@ public class IDepartmentService : IDepartmentInterface
         existName.EmployeeLimit = limit;
         departmentRepository.Update(existName);
     }
-    public List<Department> GetAll()
+    public List<Department> DepartmentGetAll()
     {
         return departmentRepository.GetAll();
     }
-    public Department GetById(int id)
+    public Department DepartmentGetById(int id)
     {
         var exist = departmentRepository.Get(id);
         if (exist == null)

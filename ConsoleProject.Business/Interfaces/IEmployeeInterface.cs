@@ -4,9 +4,9 @@ namespace ConsoleProject.Business.Interfaces;
 
 public interface IEmployeeInterface
 {
-    void Create(Employee employee);
-    void Update(string name, string surname, double salary, int id, int departmentId);
-    void Delete(int id);
-    Employee GetById(int id);
-    List<Employee> GetAll();
+    void CreateEmployee(Employee employee);
+    void UpdateEmployee(string name, string surname, double salary, int id, int departmentId);
+    void DeleteEmployee(int id);
+    Employee EmployeeGetById(int id);
+    List<Employee> EmployeeGetAll();
 }
