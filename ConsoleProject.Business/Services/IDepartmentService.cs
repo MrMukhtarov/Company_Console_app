@@ -77,6 +77,10 @@ public class IDepartmentService : IDepartmentInterface
         {
             throw new LimitDoesNotMatchException(Helper.Error["LimitDoesNotMatchException"]);
         }
+        if (limit <= 0)
+        {
+            throw new LimitDoesNotMatchException(Helper.Error["LimitDoesNotMatchException"]);
+        }
         existName.Name = newName;
         existName.EmployeeLimit = limit;
         departmentRepository.Update(existName);

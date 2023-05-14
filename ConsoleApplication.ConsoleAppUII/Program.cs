@@ -2,10 +2,36 @@
 
 CompanyService company = new CompanyService();
 company.Create("NctLmn");
-company.Create("ncctLmn");
+company.Create("NctLmnnct");
+//company.Delete(2);
+company.Update("NctLmnnct", "myau");
+Console.WriteLine("GEt by id");
+Console.WriteLine(company.GetById(2));
+
+foreach (var i in company.GetAll())
+{
+    Console.WriteLine(i);
+}
 
 
 
+Console.WriteLine("==========");
+Console.WriteLine("Department");
+Console.WriteLine("==========");
+IDepartmentService department = new IDepartmentService();
+department.Create("Backend", 2, 2);
+department.Create("Frontend", 2, 2);
+department.UpdateDepartment("Frontend", "React", 1);
+foreach (var i in department.GetAll())
+{
+    Console.WriteLine(i);
+}
+
+Console.WriteLine("Myau departments");
+foreach (var i in company.GetAllDepartment("myau"))
+{
+    Console.WriteLine(i);
+}
 
 
 
