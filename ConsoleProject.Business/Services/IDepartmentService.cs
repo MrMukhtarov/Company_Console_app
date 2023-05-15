@@ -2,6 +2,7 @@
 using ConsoleProject.Business.Helpers;
 using ConsoleProject.Business.Interfaces;
 using ConsoleProject.Core.Entities;
+using ConsoleProjetc.DataAccess.Context;
 using ConsoleProjetc.DataAccess.Implementations;
 
 namespace ConsoleProject.Business.Services;
@@ -72,6 +73,13 @@ public class IDepartmentService : IDepartmentInterface
         if (name.Trim().ToUpper() == newNameTrim.ToUpper())
         {
             throw new SameNameException(Helper.Error["SameNameException"]);
+        }
+        foreach(var i in DbContext.Departments)
+        {
+            if(i.Name.ToLower() == newNameTrim.ToLower())
+            {
+                throw new AlreadyExistException(Helper.Error["AlreadyExistException"]);
+            }
         }
         if (GetDepartmentEmployees(name).Count > limit)
         {
