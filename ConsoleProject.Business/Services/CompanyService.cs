@@ -2,6 +2,7 @@
 using ConsoleProject.Business.Helpers;
 using ConsoleProject.Business.Interfaces;
 using ConsoleProject.Core.Entities;
+using ConsoleProjetc.DataAccess.Context;
 using ConsoleProjetc.DataAccess.Implementations;
 
 namespace ConsoleProject.Business.Services;
@@ -68,7 +69,14 @@ public class CompanyService : ICompanyInterface
         {
             throw new SizeException(Helper.Error["SizeException"]);
         }
-        if(existNewName != null)
+        foreach (var i in DbContext.Companys)
+        {
+            if (newName.Trim().ToLower() == i.Name.ToLower())
+            {
+                throw new AlreadyExistException(Helper.Error["AlreadyExistException"]);
+            }
+        }
+        if (existNewName != null)
         {
             throw new AlreadyExistException(Helper.Error["AlreadyExistException"]);
         }

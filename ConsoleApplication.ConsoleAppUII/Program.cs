@@ -831,6 +831,3 @@ void GetAllDepartment(CompanyService companyService)
         }
     } while (!check);
 }
-
-
-
